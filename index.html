@@ -45,8 +45,6 @@
     allow="geolocation; microphone; camera"
     sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
   </iframe>
-
-</body>
   <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
@@ -54,4 +52,5 @@
       .catch(err => console.log('Service Worker registration failed:', err));
   }
 </script>
+</body>
 </html>
