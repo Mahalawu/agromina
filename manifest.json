@@ -1,26 +1,17 @@
 {
-  "background_color": "#ffffff",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "Mahalawu Agromina System",
-  "orientation": "any",
-  "scope": "/",
   "short_name": "Agromina",
-  "start_url": "/",
+  "start_url": "/agromina/",
+  "scope": "/agromina/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
   "theme_color": "#0f766e",
   "icons": [
     {
       "src": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
-      "type": "image/png",
       "sizes": "512x512",
-      "isSquare": true,
-      "isPng": true,
-      "isWebp": false,
-      "isJpg": false,
-      "width": 512,
-      "is512x512": true,
-      "is256x256": false,
-      "is192x192": false
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
