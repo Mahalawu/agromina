@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.mahalawu.twa",
+    "sha256_cert_fingerprints": ["81:22:7A:E4:84:F8:33:35:EA:94:1E:AD:A9:58:68:69:93:9F:7F:51:32:D1:19:72:6E:9A:AE:39:30:DA:F8:F4"]
+  }
+}]
