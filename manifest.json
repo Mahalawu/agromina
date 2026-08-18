@@ -5,7 +5,6 @@
   "scope": "/agromina/",
   "display": "standalone",
   "background_color": "#f8fafc",
-  "display_override": ["fullscreen", "minimal-ui"],
   "theme_color": "#0f766e",
   "icons": [
     {
