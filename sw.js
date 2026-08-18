@@ -1,38 +1,52 @@
 const CACHE_NAME = 'agromina-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  'https://cdn-icons-png.flaticon.com/512/628/628283.png'
+  '/agromina/',
+  '/agromina/index.html',
+  '/agromina/manifest.json'
+  // HANYA FILE LOKAL!
+  // TIDAK PERLU cache GAS atau external URLs
 ];
 
-// Install Service Worker
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
+      .then(cache => {
+        console.log('Caching PWA shell...');
+        return cache.addAll(urlsToCache);
+      })
+      .then(() => self.skipWaiting())
   );
 });
 
-// Fetch dari cache
+// STRATEGI: Network FIRST untuk semua request
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
+    fetch(event.request)  // Coba ambil dari network dulu
+      .catch(() => {
+        // Jika offline, coba dari cache
+        return caches.match(event.request)
+          .then(response => {
+            // Jika ada di cache, tampilkan
+            if (response) return response;
+            
+            // Jika tidak ada, tampilkan halaman offline (opsional)
+            return caches.match('/agromina/offline.html');
+          });
+      })
   );
 });
 
-// Aktivasi dan hapus cache lama
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
+            console.log('Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
