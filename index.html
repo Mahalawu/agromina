@@ -45,11 +45,18 @@
     allow="geolocation; microphone; camera"
     sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
   </iframe>
-  <script>
+<script>
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-      .then(() => console.log('Service Worker registered'))
-      .catch(err => console.log('Service Worker registration failed:', err));
+    window.addEventListener('load', () => {
+      // Ganti '/sw.js' dengan '/agromina/sw.js'
+      navigator.serviceWorker.register('/agromina/sw.js')
+        .then(registration => {
+          console.log('Service Worker registered:', registration);
+        })
+        .catch(error => {
+          console.log('Service Worker registration failed:', error);
+        });
+    });
   }
 </script>
 </body>
