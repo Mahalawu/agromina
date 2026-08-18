@@ -1,10 +1,11 @@
 {
   "name": "Mahalawu Agromina System",
   "short_name": "Agromina",
-  "start_url": "/agromina/",
-  "scope": "/agromina/",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
+  "display_override": ["fullscreen", "minimal-ui"],
   "theme_color": "#0f766e",
   "icons": [
     {
