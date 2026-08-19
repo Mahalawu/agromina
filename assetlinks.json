@@ -3,7 +3,6 @@
   "target": {
     "namespace": "android_app",
     "package_name": "io.github.mahalawu.twa",
-    // Ganti fingerprint di bawah ini dengan yang baru dari alat tersebut
     "sha256_cert_fingerprints": ["D2:9D:D2:0A:3B:1A:A7:6F:82:37:46:40:D0:A1:EA:D6:13:81:DC:9C:A3:DB:3E:3E:8F:FD:E7:12:28:10:5F:17"]
   }
 }]
