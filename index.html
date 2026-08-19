@@ -47,9 +47,44 @@
 
 <script>
   if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('/agromina/sw.js')
+    navigator.serviceWorker.register('sw.js')
   }
 </script>
-  
+<!-- Banner Notifikasi Offline -->
+<div id="offline-banner" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ef4444;
+  color: white;
+  text-align: center;
+  padding: 8px 12px;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 9999;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+">
+  ⚠️ Koneksi terputus. Anda sedang dalam mode offline.
+</div>
+
+<script>
+  const offlineBanner = document.getElementById('offline-banner');
+
+  function updateOnlineStatus() {
+    if (navigator.onLine) {
+      offlineBanner.style.display = 'none';
+    } else {
+      offlineBanner.style.display = 'block';
+    }
+  }
+
+  // Cek status awal & pasang event listener
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  updateOnlineStatus();
+</script>
 </body>
 </html>
