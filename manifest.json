@@ -13,6 +13,7 @@
       "src": "http://mahalawu.github.io/agromina/fish.png",
       "type": "image/png",
       "sizes": "512x512",
+      "purpose": "any maskable",
       "isSquare": true,
       "isPng": true,
       "isWebp": false,
