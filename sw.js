@@ -1,37 +1,44 @@
-const CACHE_NAME = 'cool-cache';
+const CACHE_NAME = 'agromina-v1';
 
-// Add whichever assets you want to precache here:
-const PRECACHE_ASSETS = [
-    '/assets/',
-    '/src/'
-]
-
-// Listener for the install event - precaches our assets list on service worker install.
+// Pasang Service Worker langsung tanpa menunggu
 self.addEventListener('install', event => {
-    event.waitUntil((async () => {
-        const cache = await caches.open(CACHE_NAME);
-        cache.addAll(PRECACHE_ASSETS);
-    })());
+  self.skipWaiting();
 });
 
+// Ambil alih kontrol tab secara langsung
 self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
 });
 
+// Strategi: Network First (Utamakan internet, jika offline gunakan cache)
 self.addEventListener('fetch', event => {
-  event.respondWith(async () => {
-      const cache = await caches.open(CACHE_NAME);
+  // Hanya proses request GET (bukan POST/PUT)
+  if (event.request.method !== 'GET') return;
 
-      // match the request to our cache
-      const cachedResponse = await cache.match(event.request);
-
-      // check if we got a valid response
-      if (cachedResponse !== undefined) {
-          // Cache hit, return the resource
+  event.respondWith(
+    fetch(event.request)
+      .then(networkResponse => {
+        // Jika internet lancar, simpan/perbarui respon terbaru ke cache
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      })
+      .catch(async () => {
+        // Jika internet terputus/offline, ambil dari cache
+        const cachedResponse = await caches.match(event.request);
+        if (cachedResponse) {
           return cachedResponse;
-      } else {
-        // Otherwise, go to the network
-          return fetch(event.request)
-      };
-  });
+        }
+        // Jika file tidak ada di cache sama sekali
+        return new Response('Koneksi terputus. Silakan periksa jaringan Anda.', {
+          status: 503,
+          statusText: 'Service Unavailable',
+          headers: new Headers({ 'Content-Type': 'text/plain; charset=utf-8' })
+        });
+      })
+  );
 });
