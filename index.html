@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Mahalawu Agromina System</title>
 
-  <link rel="manifest" href="manifest.json">
-
   <!-- 1. LOGO / FAVICON CUSTOM KAMU (Ganti URL gambar ini dengan link logo kamu) -->
-  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/628/628283.png">
+  <link rel="icon" type="image/png" href="https://www.flaticon.com/free-icon/fish_10507943?term=fish&related_id=10507943">
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/628/628283.png">
 
   <!-- 2. METADATA UNTUK SHORTCUT / PWA HP -->
@@ -45,19 +43,6 @@
     allow="geolocation; microphone; camera"
     sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
   </iframe>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      // Ganti '/sw.js' dengan '/agromina/sw.js'
-      navigator.serviceWorker.register('/agromina/sw.js')
-        .then(registration => {
-          console.log('Service Worker registered:', registration);
-        })
-        .catch(error => {
-          console.log('Service Worker registration failed:', error);
-        });
-    });
-  }
-</script>
+
 </body>
 </html>
