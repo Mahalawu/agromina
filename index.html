@@ -45,16 +45,11 @@
     sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
   </iframe>
 
-  <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/pwabuilder-sw.js')
-        .then(reg => console.log('Service Worker terdaftar dengan sukses!', reg))
-        .catch(err => console.error('Pendaftaran Service Worker gagal:', err));
-    });
+<script>
+  if (typeof navigator.serviceWorker !== 'undefined') {
+    navigator.serviceWorker.register('sw.js')
   }
 </script>
-
   
 </body>
 </html>
