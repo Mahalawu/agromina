@@ -51,63 +51,72 @@
   }
 </script>
 
-  <!-- Banner Notifikasi Offline & Tombol Reload -->
-<div id="offline-banner" style="
+<!-- Halaman Fullscreen Offline -->
+<div id="offline-screen" style="
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  background-color: #ef4444;
-  color: white;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f8fafc;
+  color: #1e293b;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  padding: 10px 12px;
-  font-family: sans-serif;
-  font-size: 13px;
-  font-weight: bold;
-  z-index: 9999;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  padding: 24px;
+  z-index: 99999;
 ">
-  <span>⚠️ Koneksi terputus. Anda sedang dalam mode offline.</span>
-  <button id="reload-btn" onclick="reloadApp()" style="
-    margin-left: 8px;
-    padding: 4px 10px;
-    background-color: white;
-    color: #ef4444;
+  <!-- Ikon Sinyal/Offline -->
+  <div style="font-size: 64px; margin-bottom: 16px;">📡</div>
+  
+  <h2 style="font-family: sans-serif; font-size: 20px; font-weight: bold; margin-bottom: 8px; color: #0f766e;">
+    Koneksi Terputus
+  </h2>
+  
+  <p style="font-family: sans-serif; font-size: 14px; color: #64748b; max-width: 280px; margin-bottom: 24px; line-height: 1.5;">
+    Aplikasi Mahalawu Agromina membutuhkan koneksi internet untuk memuat data.
+  </p>
+
+  <button onclick="reloadApp()" style="
+    padding: 12px 28px;
+    background-color: #0f766e;
+    color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-family: sans-serif;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 14px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-  ">Muat Ulang</button>
+  ">
+    Coba Lagi / Muat Ulang
+  </button>
 </div>
 
 <script>
-  const offlineBanner = document.getElementById('offline-banner');
+  const offlineScreen = document.getElementById('offline-screen');
   const appIframe = document.querySelector('iframe'); // Mengambil element iframe GAS kamu
 
   function reloadApp() {
     if (appIframe) {
-      // Reload ulang src iframe tanpa merefresh seluruh aplikasi
       appIframe.src = appIframe.src;
     }
   }
 
   function updateOnlineStatus() {
     if (navigator.onLine) {
-      offlineBanner.style.display = 'none';
-      // OTOMATIS RELOAD IFRAME BEGITU KONEKSI KEMBALI ONLINE
-      reloadApp();
+      offlineScreen.style.display = 'none';
+      reloadApp(); // Auto-reload begitu online lagi
     } else {
-      offlineBanner.style.display = 'block';
+      offlineScreen.style.display = 'flex'; // Tampilkan layar penuh
     }
   }
 
-  // Cek status koneksi secara real-time
   window.addEventListener('online', updateOnlineStatus);
   window.addEventListener('offline', updateOnlineStatus);
   
-  // Jalankan cek status saat pertama kali dibuka
   updateOnlineStatus();
 </script>
   
