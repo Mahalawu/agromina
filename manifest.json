@@ -1,18 +1,34 @@
 {
+  "background_color": "#0f766e",
+  "dir": "ltr",
+  "display": "standalone",
   "name": "Mahalawu Agromina System",
+  "orientation": "any",
+  "scope": "/agromina/",
   "short_name": "Agromina",
   "start_url": "/agromina/",
-  "scope": "/agromina/",
-  "display": "standalone",
-  "background_color": "#f8fafc",
-  "display_override": ["fullscreen", "minimal-ui"],
   "theme_color": "#0f766e",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
-      "sizes": "512x512",
+      "src": "http://mahalawu.github.io/agromina/fish.png",
       "type": "image/png",
-      "purpose": "any"
+      "sizes": "512x512",
+      "isSquare": true,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 512,
+      "is512x512": true,
+      "is256x256": false,
+      "is192x192": false
     }
+  ],
+  "id": "Mahalawu Agromina System",
+  "description": "Aplikasi untuk mengelola peternakan ikan lele konsumsi. Memantau umur lele, jumlah pakan, FCR, dll.",
+  "categories": [
+    "business",
+    "development",
+    "finance",
+    "pets"
   ]
 }
