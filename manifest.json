@@ -17,19 +17,19 @@
   "theme_color": "#0f766e",
   "icons": [
     {
-      "src": "http://github.io",
+      "src": "https://mahalawu.github.io/agromina/fish.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "http://github.io",
+      "src": "https://mahalawu.github.io/agromina/fish.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "http://github.io",
+      "src": "https://mahalawu.github.io/agromina/fish.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
