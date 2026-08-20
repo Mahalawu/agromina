@@ -131,9 +131,9 @@
         Notification.requestPermission().then(permission => {
           if (permission === 'granted') {
             messaging.getToken({ 
-              serviceWorkerRegistration: registration,
-              vapidKey: 'BMxrfSAbPYoQS4afzp9xfWiO9pfbACSs-byIN1yFT7MnDGG1XAC7KCJf9EtJclDsK4yPu8jTYdu2GSKAUEGExlg'
-            }).then(currentToken => {
+  serviceWorkerRegistration: registration,
+  vapidKey: 'BMxrfSAbPYoQS4afzp9xfWi09pfACSs-byIN1yFT7MnDGG1XAC7KCJf9EtJclDsK4yPu8jTYdu2GSKAUEGxlg' 
+}).then(currentToken => {
               if (currentToken) {
                 console.log('FCM Token Operator:', currentToken);
               }
