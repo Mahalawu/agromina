@@ -131,6 +131,47 @@
   
   updateOnlineStatus();
 </script>
+
+  <!-- Firebase SDK (Compat Version) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging-compat.js"></script>
+
+<script>
+  // 1. Masukkan firebaseConfig dari Firebase Console di sini
+  const firebaseConfig = {
+    apiKey: "AIzaSyAMDSJMXm1eFGUM8bTZEWWM-OcnR-S28jE",
+    authDomain: "agromina-notification.firebaseapp.com",
+    projectId: "agromina-notification",
+    storageBucket: "agromina-notification.firebasestorage.app",
+    messagingSenderId: "744536343620",
+    appId: "1:744536343620:web:21572e60b3558d759d2811"
+  };
+
+  // Inisialisasi Firebase
+  firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+
+  // Registrasi Service Worker & Ambil Token
+  if ('serviceWorker' in navigator && 'Notification' in window) {
+    navigator.serviceWorker.register('sw.js').then(registration => {
+      messaging.useServiceWorker(registration);
+
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          // Ambil Token FCM HP Operator
+          messaging.getToken({ 
+            vapidKey: 'BMxrfSAbPYoQS4afzp9xfWiO9pfbACSs-byIN1yFT7MnDGG1XAC7KCJf9EtJclDsK4yPu8jTYdu2GSKAUEGExlg' 
+          }).then(currentToken => {
+            if (currentToken) {
+              console.log('FCM Token Operator:', currentToken);
+              // Nanti token ini dikirim ke Google Apps Script / Spreadsheet
+            }
+          });
+        }
+      });
+    });
+  }
+</script>
   
 </body>
 </html>
