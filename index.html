@@ -46,8 +46,20 @@
   </iframe>
 
 <script>
-  if (typeof navigator.serviceWorker !== 'undefined') {
-    navigator.serviceWorker.register('sw.js')
+  // Registrasi Service Worker & Meminta Izin Notifikasi
+  if ('serviceWorker' in navigator && 'Notification' in window) {
+    navigator.serviceWorker.register('sw.js').then(registration => {
+      console.log('Service Worker terpasang!');
+
+      // Minta izin notifikasi ke Operator HP saat aplikasi dibuka
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('Izin notifikasi diberikan!');
+        } else {
+          console.log('Izin notifikasi ditolak/dilewati.');
+        }
+      });
+    });
   }
 </script>
 
