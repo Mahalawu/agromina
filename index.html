@@ -127,23 +127,33 @@
     const messaging = firebase.messaging();
 
     if ('serviceWorker' in navigator && 'Notification' in window) {
-      navigator.serviceWorker.register('sw.js?v=2').then(registration => {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            messaging.getToken({ 
-  serviceWorkerRegistration: registration,
-  vapidKey: 'BMxrfSAbPYoQS4afzp9xfWiO9pfbACSs-byIN1yFT7MnDGG1XAC7KCJf9EtJclDsK4yPu8jTYdu2GSKAUEGExlg' 
-}).then(currentToken => {
-              if (currentToken) {
-                console.log('FCM Token Operator:', currentToken);
-              }
-            }).catch(err => {
-              console.error('Gagal mengambil token FCM:', err);
+  navigator.serviceWorker.register('sw.js?v=2').then(registration => {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        messaging.getToken({ 
+          serviceWorkerRegistration: registration,
+          vapidKey: 'BMxrfSAbPYoQS4afzp9xfWiO9pfbACSs-byIN1yFT7MnDGG1XAC7KCJf9EtJclDsK4yPu8jTYdu2GSKAUEGExlg' 
+        }).then(currentToken => {
+          if (currentToken) {
+            console.log('FCM Token Operator:', currentToken);
+            
+            // Kirim token ke Apps Script untuk disimpan ke Sheet Token_FCM
+            const webAppUrl = "https://script.google.com/macros/s/AKfycbyQzAGvVdTqLtbzM8dM0WsQrdxA3ahk_XzjODaMTvfbRWfi16DKUQjHo5JQOm3urEY/exec";
+            fetch(webAppUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: 'action=simpanToken&token=' + encodeURIComponent(currentToken)
             });
           }
+        }).catch(err => {
+          console.error('Gagal mengambil token FCM:', err);
         });
-      });
-    }
+      }
+    });
+  });
+}
+    
   </script>
 
 </body>
