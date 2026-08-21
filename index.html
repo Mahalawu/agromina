@@ -136,7 +136,6 @@
         }).then(currentToken => {
           if (currentToken) {
             console.log('FCM Token Operator:', currentToken);
-            
             // Kirim token ke Apps Script untuk disimpan ke Sheet Token_FCM
             const webAppUrl = "https://script.google.com/macros/s/AKfycbyQzAGvVdTqLtbzM8dM0WsQrdxA3ahk_XzjODaMTvfbRWfi16DKUQjHo5JQOm3urEY/exec";
             fetch(webAppUrl, {
